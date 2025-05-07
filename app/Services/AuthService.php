@@ -9,12 +9,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
 {
-    private $guards = [
-        'admin' => 'admin-api',
-        'candidate' => 'candidate-api',
-        'employer' => 'employer-api',
-    ];
-
 
     private const ACCESS_TOKEN_EXPIRY = 1; // 1 Day
     private const REFRESH_TOKEN_SHORT_EXPIRY = 7; // 7 Days

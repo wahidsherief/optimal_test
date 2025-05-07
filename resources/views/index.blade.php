@@ -63,7 +63,7 @@
             <div class="flex items-center justify-center gap-3 mb-4">
                 <span class="text-4xl rocket">🚀</span>
                 <h1 class="text-4xl font-bold text-gray-800 text-glow">
-                    Qamla is Running!
+                    Bookshelf API App is Running!
                 </h1>
             </div>
             <p class="text-gray-600 text-lg">Your application is up and running smoothly.</p>
