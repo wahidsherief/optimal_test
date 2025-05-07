@@ -18,7 +18,7 @@ Follow the steps below to install and run the Bookshelf API on your local machin
 
 ### 1. Clone the Repository
 
-git clone https://github.com/wahidsherief/optimal_test.gitad
+git clone https://github.com/wahidsherief/optimal_test.git
 
 ### 2. Install PHP Dependencies
 
@@ -98,6 +98,7 @@ The deployment logic is defined in `.github/workflows/deploy.yml`. Here's a brie
 
 ### deploy.yml
 
+```
 name: Deploy to Dev Server
 
 on:
@@ -125,3 +126,4 @@ runs-on: ubuntu-latest
 
       - name: Deploy to Server
         run: ssh -o StrictHostKeyChecking=no root@[your-server-ip] '[your-app-path]'
+```
