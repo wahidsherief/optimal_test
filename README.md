@@ -76,12 +76,6 @@ http://localhost:8000/api/documentation
 
 ## 🔄 CI/CD with GitHub Actions
 
-Here’s the complete `CI/CD with GitHub Actions` section to add to your `README.md`, assuming SSH setup is already done on both GitHub and the target server:
-
----
-
-## 🔄 CI/CD with GitHub Actions
-
 ### ✅ Assumptions
 
 The following SSH setup is **already completed**:
