@@ -1,0 +1,1027 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bookshelf API",
+        "description": "API documentation for Bookshelf application",
+        "contact": {
+            "email": "support@test.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login user and get JWT token",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@test.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/bookshelves/{bookshelfId}/books": {
+            "get": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Get all books in a bookshelf",
+                "operationId": "456ebb28e3bc14fb681fa9d06e41d374",
+                "parameters": [
+                    {
+                        "name": "bookshelfId",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Bookshelf not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Create a new book in a bookshelf",
+                "operationId": "8faffa70ccfdca53b9f35bd5d99b170e",
+                "parameters": [
+                    {
+                        "name": "bookshelfId",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "published_year"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "author": {
+                                        "type": "string"
+                                    },
+                                    "published_year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully"
+                    },
+                    "404": {
+                        "description": "Bookshelf not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/bookshelves/{bookshelfId}/books/{bookId}": {
+            "get": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Get a specific book in a bookshelf",
+                "operationId": "7ef75f011f0c6d50ad69ff6f8d42c2e6",
+                "parameters": [
+                    {
+                        "name": "bookshelfId",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Bookshelf or Book not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Update a specific book in a bookshelf",
+                "operationId": "ad675061935b0e3bca61c2ef9ac0927a",
+                "parameters": [
+                    {
+                        "name": "bookshelfId",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "published_year"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "author": {
+                                        "type": "string"
+                                    },
+                                    "published_year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Book updated successfully"
+                    },
+                    "404": {
+                        "description": "Bookshelf or Book not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Delete a specific book in a bookshelf",
+                "operationId": "2a701c014e25cfa4ad387eedd016fbb2",
+                "parameters": [
+                    {
+                        "name": "bookshelfId",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted successfully"
+                    },
+                    "404": {
+                        "description": "Bookshelf or Book not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/books/search": {
+            "get": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Search for books by title or author",
+                "operationId": "a50e12f6ebf00d1971a30d2fe743509c",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the book",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author of the book",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/bookshelves": {
+            "get": {
+                "tags": [
+                    "Bookshelf"
+                ],
+                "summary": "Get all bookshelves",
+                "operationId": "2025f96dae889e634ad9cd0154ea5c06",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "No bookshelves found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Bookshelf"
+                ],
+                "summary": "Create a new bookshelf",
+                "operationId": "1f04af4889e5b1ee1dc359ddf7847ae1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Bookshelf created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/bookshelves/{id}": {
+            "get": {
+                "tags": [
+                    "Bookshelf"
+                ],
+                "summary": "Get a specific bookshelf",
+                "operationId": "f9c387dfbd4d0b218bc951c22a947d66",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Bookshelf not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Bookshelf"
+                ],
+                "summary": "Update a specific bookshelf",
+                "operationId": "f700b386386acb6e2f8ef6ee0efd8635",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Bookshelf updated successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Bookshelf not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Bookshelf"
+                ],
+                "summary": "Delete a specific bookshelf",
+                "operationId": "14b8cca46873a2d9a9deeab8ec34efdd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the bookshelf",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bookshelf deleted successfully"
+                    },
+                    "404": {
+                        "description": "Bookshelf not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/books/{bookId}/chapters": {
+            "get": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Get all chapters of a book",
+                "operationId": "0d4ec9c723237cc1b44b7f25ee7919d0",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Create a new chapter in a book",
+                "operationId": "46fd1214cc2888ecdff41589ae0fb9ea",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "chapter_number": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Chapter created successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/books/{bookId}/chapters/{chapterId}": {
+            "get": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Get a specific chapter of a book",
+                "operationId": "3509ca4c9a04fabf0c6b5ccb88f56163",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Update a specific chapter of a book",
+                "operationId": "90d34ac8d0ff93b3d2499308b3f14527",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "chapter_number": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Chapter updated successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Delete a specific chapter of a book",
+                "operationId": "60769be01a163dd78f02faa01e64581a",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Chapter deleted successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chapters/{chapterId}/full-content": {
+            "get": {
+                "tags": [
+                    "Chapter"
+                ],
+                "summary": "Get full content of a chapter",
+                "operationId": "2831ba1b16b25684fc2881a2c03cf84f",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chapters/{chapterId}/pages": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Get all pages of a chapter",
+                "operationId": "598a5dcdeb67d7c2c88b71f27796e1a7",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Chapter not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Create a new page in a chapter",
+                "operationId": "df41eb2a878f02a5e7b0957671f61466",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "page_number",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "page_number": {
+                                        "type": "integer"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Page created successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/chapters/{chapterId}/pages/{pageId}": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Get a specific page of a chapter",
+                "operationId": "b058abf4f50cef1bab68bac6b08a7f00",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageId",
+                        "in": "path",
+                        "description": "ID of the page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Update a specific page of a chapter",
+                "operationId": "70232896dd1e8a7227f6db8393b70916",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageId",
+                        "in": "path",
+                        "description": "ID of the page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "page_number",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "page_number": {
+                                        "type": "integer"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Page updated successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Delete a specific page of a chapter",
+                "operationId": "c244c05af3438e10a656a38712ca9e8b",
+                "parameters": [
+                    {
+                        "name": "chapterId",
+                        "in": "path",
+                        "description": "ID of the chapter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageId",
+                        "in": "path",
+                        "description": "ID of the page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Page deleted successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        },
+        {
+            "name": "Book",
+            "description": "Book"
+        },
+        {
+            "name": "Bookshelf",
+            "description": "Bookshelf"
+        },
+        {
+            "name": "Chapter",
+            "description": "Chapter"
+        },
+        {
+            "name": "Page",
+            "description": "Page"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearerAuth",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
